@@ -1,12 +1,12 @@
 <?php
- namespace bones\containers;
+namespace bones\containers;
 
- use bones\base\container;
- 
- class div extends container
- {
+use bones\base\container;
+
+class div extends container
+{
 
 
- }
+}
 
 

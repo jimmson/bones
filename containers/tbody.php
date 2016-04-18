@@ -3,9 +3,8 @@ namespace bones\containers;
 
 use bones\base\container;
 
-class body extends container
+class tbody extends container
 {
-
 
 }
 

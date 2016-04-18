@@ -3,7 +3,7 @@ namespace bones\controls;
 
 use bones\base\control;
 
-class title extends control
+class span extends control
 {
 
 	public function __construct( $_name )

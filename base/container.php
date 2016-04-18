@@ -1,5 +1,6 @@
 <?php
- namespace bones\base;
+
+namespace bones\base;
 
 abstract class container extends control
 {
@@ -46,9 +47,22 @@ abstract class container extends control
 		{
 			$control = $this->get_control( $key );
 
-			if ( $control && property_exists( $control, "value" ) )
+			if ( $control && method_exists( $control, "set_value" ) )
 			{
-				$control->set_value( $value );		
+				$control->set_value( $value );	
+			}	
+		}
+	}
+
+	public function set_control_properties( $_property_method, $_value )
+	{
+		$controls = $this->get_controls();
+
+		foreach ( $controls as $control )
+		{
+			if ( method_exists( $control, $_property_method ) )
+			{
+				$control->$_property_method( $_value );	
 			}	
 		}
 	}

@@ -1,11 +1,11 @@
 <?php
- namespace bones\controls;
+namespace bones\controls;
 
- use bones\base\control;
- 
- class button extends control
- {
+use bones\base\control;
 
+class button extends control
+{
+    // Type
     const SUBMIT   = "submit";
 
     private $type;
@@ -35,6 +35,6 @@
         return $attributes;
     }
 
- }
+}
 
 

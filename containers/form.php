@@ -1,18 +1,19 @@
 <?php
- namespace bones\containers;
+namespace bones\containers;
 
- use bones\base\container;
- 
- class form extends container
- {
+use bones\base\container;
 
- 	const GET 	= "GET";
- 	const POST 	= "POST";
+class form extends container
+{
+    // Request methods
+    const GET 	= "GET";
+    const POST 	= "POST";
 
- 	private $action;
- 	private $method;
+    private $action;
+    private $method;
+    private $enctype;
 
- 	public function __construct( $_name, $_action = "", $_method = self::GET )
+    public function __construct( $_name, $_action = "", $_method = self::GET )
     {
         parent::__construct( $_name );
 
@@ -40,15 +41,26 @@
         $this->method = $_method;
     }
 
+    public function get_enctype()
+    {
+        return $this->enctype;
+    }
+
+    public function set_enctype( $_enctype )
+    {
+        $this->enctype = $_enctype;
+    }
+
     protected function build_attributes()
     {
         $attributes  = parent::build_attributes();
-        $attributes .= self::get_attribute( "action", $this->get_action() );
-        $attributes .= self::get_attribute( "method", $this->get_method() );
+        $attributes .= self::get_attribute( "action",  $this->get_action() );
+        $attributes .= self::get_attribute( "method",  $this->get_method() );
+        $attributes .= self::get_attribute( "enctype", $this->get_enctype() );
 
         return $attributes;
     }
 
- }
+}
 
 

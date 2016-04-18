@@ -1,10 +1,10 @@
 <?php
- namespace bones\controls;
+namespace bones\controls;
 
- use bones\base\control;
- 
- class meta extends control
- {
+use bones\base\control;
+
+class meta extends control
+{
 
     private $content;
 
@@ -19,7 +19,7 @@
     {
         $this->content = $_content;
     }
- 
+
     public function get_content()
     {
         return $this->content;    
@@ -33,6 +33,6 @@
         return $attributes;
     }
 
- }
+}
 
 

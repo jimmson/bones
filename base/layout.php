@@ -1,5 +1,6 @@
 <?php
- namespace bones\base;
+
+namespace bones\base;
 
 class layout
 {
@@ -7,7 +8,7 @@ class layout
 	public function __construct()
 	{
 
-    }
+	}
 
 	public function render( $_container )
 	{

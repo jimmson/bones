@@ -3,32 +3,16 @@ namespace bones\controls;
 
 use bones\base\control;
 
-class link extends control
+class a extends control
 {
+    protected $href;
 
-    // rels
-    const STYLESHEET  = "stylesheet";
-
-    private $rel;
-    private $href;
-
-    public function __construct( $_name, $_rel = self::STYLESHEET )
+    public function __construct( $_name )
     {
         parent::__construct( $_name );
 
-        $this->rel  = $_rel;
-        $this->set_tag( control::EMPTY_TAG );
+        $this->set_tag( control::FULL_TAG );
         $this->set_named( false );
-    }
-
-    public function set_rel( $_rel )
-    {
-        $this->rel = $_rel;
-    }
-
-    public function get_rel()
-    {
-        return $this->rel;    
     }
 
     public function set_href( $_href )
@@ -44,11 +28,11 @@ class link extends control
     protected function build_attributes()
     {
         $attributes  = parent::build_attributes();
-        $attributes .= self::get_attribute( "rel",  $this->get_rel() );
         $attributes .= self::get_attribute( "href", $this->get_href() );
 
         return $attributes;
     }
+
 }
 
 

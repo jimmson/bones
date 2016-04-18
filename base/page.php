@@ -22,21 +22,30 @@ class page extends container
 	{
 		parent::__construct("name");
 
-		$this->links = [];
-		$this->meta  = [];
-		$this->head  = new head("head");
-		$this->body  = new body("body");
+		$this->links 	= [];
+		$this->meta  	= [];
+		$this->scripts  = [];
+		$this->head  	= new head("head");
+		$this->body  	= new body("body");
 
 		$this->set_element("html");
 
 		$this->title = new title("title");
 		$this->title->set_text( $_title );
-    }
+	}
 
-    public function add( ...$_control )
+	public function add( ...$_control )
 	{
 		$this->body->add( ...$_control );
 	} 
+
+	public function add_script( $_src )
+	{
+		$script = new script("script");
+		$script->set_src( $_src );
+
+		array_push( $this->scripts, $script );
+	}
 
 	public function add_stylesheet( $_href )
 	{
@@ -59,14 +68,15 @@ class page extends container
 		$this->head->add( $this->title );
 		$this->head->add( ...$this->meta );
 		$this->head->add( ...$this->links );
+		$this->head->add( ...$this->scripts );
 	}
 
- 	public function get_body()
- 	{
- 		$this->get_head();
- 		$this->head->render();
- 		$this->body->render();
- 		
- 	}
+		public function get_body()
+		{
+			$this->get_head();
+			$this->head->render();
+			$this->body->render();
+			
+		}
 
 }
