@@ -13,12 +13,13 @@ class form extends container
     private $method;
     private $enctype;
 
-    public function __construct( $_name, $_action = "", $_method = self::GET )
+    public function __construct( $_name = "", $_method = self::GET, $_action = "" )
     {
         parent::__construct( $_name );
 
-        $this->action = $_action;
-        $this->method = $_method;
+        $this->action   = $_action;
+        $this->method   = $_method;
+        $this->enctype  = "multipart/form-data";
     }
 
     public function get_action()

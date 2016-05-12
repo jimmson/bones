@@ -9,9 +9,9 @@ class table extends container
 
     private $data = array();
 
-    public function __construct( $_title )
+    public function __construct( $_name = "")
     {
-        parent::__construct( $_title );
+        parent::__construct( $_name );
 
         $layout = new table_layout();
 

@@ -12,12 +12,11 @@ class h extends control
 	const IMPORTANCE_5 = 5;
 	const IMPORTANCE_6 = 6;
 
-	public function __construct( $_name, $_importance = self::IMPORTANCE_1)
+	public function __construct( $_name , $_importance = self::IMPORTANCE_1)
 	{
 		parent::__construct( $_name );
 
 		$this->set_element("h" . $_importance);
-		$this->set_named( false );
 	}
 
 }

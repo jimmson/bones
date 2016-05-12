@@ -11,28 +11,35 @@
 
 class page extends container
 {
-	private $title;
-	private $meta;
-	private $links;
-	private $scripts;
-	private $head;
-	private $body;
+	private 	$title;
+	private 	$meta;
+	private 	$links;
+	private 	$scripts;
+	private 	$head;
+	private 	$body;
+	protected 	$requires_session;
 
 	public function __construct( $_title )
 	{
 		parent::__construct("name");
 
-		$this->links 	= [];
-		$this->meta  	= [];
-		$this->scripts  = [];
-		$this->head  	= new head("head");
-		$this->body  	= new body("body");
+		$this->links 			= [];
+		$this->meta  			= [];
+		$this->scripts  		= [];
+		$this->head  			= new head("head");
+		$this->body  			= new body("body");
+		$this->requires_session = true;
 
 		$this->set_element("html");
 
 		$this->title = new title("title");
 		$this->title->set_text( $_title );
 	}
+
+	public function requires_session()
+	{
+		return $this->requires_session;
+	} 
 
 	public function add( ...$_control )
 	{

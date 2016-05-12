@@ -12,15 +12,6 @@ use bones\containers\td;
 class table extends layout
 {
 
-	public $rows;
-
-	public function __construct()
-	{
-		parent::__construct();
-
-		$this->rows = [];
-    }
-
 	public function render( $_container )
 	{
 		$counter 	= 0; 
@@ -49,7 +40,7 @@ class table extends layout
 			foreach ( $controls as $control )
 			{
 				$new_control = clone $control;
-				$td 	= new td("td");
+				$td 		 = new td("td");
 
 				$new_control->populate($content);
 

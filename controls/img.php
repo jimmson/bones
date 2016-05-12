@@ -7,12 +7,11 @@ class img extends control
 {
     private $src;
 
-    public function __construct( $_name )
+    public function __construct( $_name = "")
     {
         parent::__construct( $_name );
 
         $this->set_tag( control::VOID_TAG );
-        $this->set_named( false );
     }
 
     public function set_src( $_src )

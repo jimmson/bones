@@ -4,18 +4,16 @@ namespace bones\base;
 
 abstract class container extends control
 {
-	private $controls;
+	private $controls = array();
 	private $layout;
 
-	public function __construct( $_name )
+	public function __construct( $_name = "")
 	{
 		parent::__construct( $_name );
 
-		$this->controls = [];
 		$this->layout 	= new layout();
 		$this->set_tag( control::CONTANING_TAG  );
         $this->set_named( false );
-		
     }
 
 	public function add( ...$_control )
@@ -27,6 +25,11 @@ abstract class container extends control
 	{
 		return $this->controls;
 	} 
+
+	public function has_controls()
+	{
+		return !empty($this->controls);
+	}
 
 	public function get_control( $_name )
 	{
@@ -74,7 +77,13 @@ abstract class container extends control
 
 	public function get_body()
 	{
-		$this->layout->render( $this );
-	}
-
+        if ( $this->has_controls() ) 
+        {
+            $this->layout->render( $this );
+        }
+        else
+        {
+            parent::get_body();
+        }
+    }	
 }

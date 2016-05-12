@@ -23,6 +23,8 @@ class input extends control
 
         $this->type = $_type;
         $this->set_tag( control::VOID_TAG );
+        $this->set_named( true );
+
     }
 
     public function get_type()

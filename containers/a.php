@@ -1,19 +1,11 @@
 <?php
-namespace bones\controls;
+namespace bones\containers;
 
-use bones\base\control;
+use bones\base\container;
 
-class a extends control
+class a extends container
 {
     protected $href;
-
-    public function __construct( $_name )
-    {
-        parent::__construct( $_name );
-
-        $this->set_tag( control::FULL_TAG );
-        $this->set_named( false );
-    }
 
     public function set_href( $_href )
     {
@@ -32,7 +24,6 @@ class a extends control
 
         return $attributes;
     }
-
 }
 
 

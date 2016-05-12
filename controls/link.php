@@ -18,7 +18,6 @@ class link extends control
 
         $this->rel  = $_rel;
         $this->set_tag( control::EMPTY_TAG );
-        $this->set_named( false );
     }
 
     public function set_rel( $_rel )

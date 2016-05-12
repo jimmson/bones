@@ -8,13 +8,6 @@ class label extends control
 
     private $for;
 
-    public function __construct( $_name )
-    {
-        parent::__construct( $_name );
-        
-        $this->set_named( false );
-    }
-
     public function set_for( $_for )
     {
         $this->for = $_for;

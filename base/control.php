@@ -20,15 +20,16 @@ abstract class control
     private $label;
     private $text;
     private $class = array();
+    private $custom_attributes = array();
     private $renderer;
     private $element;
-    private $named = true;
+    private $named = false;
     private $tag   = self::FULL_TAG;
 
     private $data_items      = array();
     private $data_properties = array();
 
-    public function __construct( $_name )
+    public function __construct( $_name = "")
     {
         $ReflectionClass = new \ReflectionClass($this);
 
@@ -82,9 +83,36 @@ abstract class control
 		return $this->text;	
 	}
 
+    public function set_custom_attribute( $_attribute, $_value )
+    {
+        $this->custom_attributes[ $_attribute ] = $_value;
+    }
+
+    public function get_custom_attribute( $_attribute )
+    {
+        return $this->custom_attributes[ $_attribute ]; 
+    }
+
+    public function get_custom_attributes()
+    {
+        $custom_attributes = "";
+
+        foreach( $this->custom_attributes as $key => $value )
+        {
+            $custom_attributes .= self::get_attribute( $key, $value);
+        }
+
+        return $custom_attributes;
+    }
+
     public function set_data_items( ...$_data_items )
     {
          $this->data_items = array_merge( $this->data_items, $_data_items );
+    }
+
+    public function has_data_items()
+    {
+         return !empty( $this->data_items );
     }
 
     public function set_data_properties( ...$_data_properties )
@@ -152,6 +180,7 @@ abstract class control
     {
         $attributes  = self::get_attribute( "class", $this->build_class());
         $attributes .= self::get_attribute( "id",    $this->get_id());
+        $attributes .= $this->get_custom_attributes();
 
         if ( $this->get_named() )
         {
@@ -174,7 +203,7 @@ abstract class control
 
         self::$indentation_level++;
 
-        return $opening_tag;
+        echo $opening_tag;
     }
     
     public function get_closing_tag()
@@ -184,34 +213,34 @@ abstract class control
         switch ( $this->tag ) 
         {
             case self::VOID_TAG:
-                return "/>";
+                echo "/>";
                 break;
-            case self::FULL_TAG:
-                return "</" . $this->get_element() . ">";
             case self::CONTANING_TAG:
-                return self::get_white_space() . "</" . $this->get_element() . ">";
+                echo self::get_white_space();
+            case self::FULL_TAG:
+                echo "</" . $this->get_element() . ">";
                 break;
             case self::EMPTY_TAG:
-                return "";
+                echo "";
                 break;
         }
     } 
 
     public function get_body()
     {
-        if ( $this->tag == self::FULL_TAG ) 
+        if ( $this->get_tag() == self::FULL_TAG || $this->get_tag() == self::CONTANING_TAG ) 
         {
-            return $this->get_text();
+            echo $this->get_text();
         }
     }
 
     public function render_control()
     {
-        echo $this->get_opening_tag();
+        $this->get_opening_tag();
 
-        echo $this->get_body();
+        $this->get_body();
 
-        echo $this->get_closing_tag();
+        $this->get_closing_tag();
     }
     
     public function render()

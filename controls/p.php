@@ -3,8 +3,8 @@ namespace bones\controls;
 
 use bones\base\control;
 
-class title extends control
-{
+class p extends control
+{	
 
 }
 

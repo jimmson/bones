@@ -17,7 +17,6 @@ class script extends control
 
         $this->type = $_type;
         $this->set_tag( control::FULL_TAG );
-        $this->set_named( false );
     }
 
     public function get_type()
