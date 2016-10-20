@@ -44,15 +44,19 @@ abstract class container extends control
 		return null;
 	}
 
-	public function set_control_values( $_values )
+	public function populate_controls( $_values )
 	{
 		foreach ( $_values as $key => $value )
 		{
 			$control = $this->get_control( $key );
 
-			if ( $control && method_exists( $control, "set_value" ) )
+			if ( !$control ) continue;
+
+			$method = $control->get_populate_method();
+
+			if ( method_exists( $control, $method ) )
 			{
-				$control->set_value( $value );	
+				$control->$method( $value );	
 			}	
 		}
 	}
@@ -77,13 +81,11 @@ abstract class container extends control
 
 	public function get_body()
 	{
-        if ( $this->has_controls() ) 
-        {
+        parent::get_body();
+
+        /*if ( $this->has_controls() ) 
+        {*/
             $this->layout->render( $this );
-        }
-        else
-        {
-            parent::get_body();
-        }
+      /*  }*/
     }	
 }

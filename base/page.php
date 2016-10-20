@@ -41,6 +41,11 @@ class page extends container
 		return $this->requires_session;
 	} 
 
+	public function set_layout( $_layout )
+	{
+		$this->body->set_layout( $_layout );
+	}
+
 	public function add( ...$_control )
 	{
 		$this->body->add( ...$_control );
@@ -75,15 +80,15 @@ class page extends container
 		$this->head->add( $this->title );
 		$this->head->add( ...$this->meta );
 		$this->head->add( ...$this->links );
-		$this->head->add( ...$this->scripts );
 	}
 
-		public function get_body()
-		{
-			$this->get_head();
-			$this->head->render();
-			$this->body->render();
-			
-		}
+	public function get_body()
+	{
+		$this->get_head();
+		$this->head->render();
+		$this->body->add( ...$this->scripts );
+		$this->body->render();
+		
+	}
 
 }

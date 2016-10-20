@@ -19,12 +19,14 @@ abstract class control
     private $name;
     private $label;
     private $text;
-    private $class = array();
+    private $class  = array();
+    private $styles = array();
     private $custom_attributes = array();
     private $renderer;
     private $element;
     private $named = false;
     private $tag   = self::FULL_TAG;
+    private $populate_method = "set_text";
 
     private $data_items      = array();
     private $data_properties = array();
@@ -83,6 +85,16 @@ abstract class control
 		return $this->text;	
 	}
 
+    public function get_populate_method()
+    {
+        return $this->populate_method;
+    }
+
+    public function set_populate_method( $_populate_method )
+    {
+        $this->populate_method = $_populate_method;
+    }
+
     public function set_custom_attribute( $_attribute, $_value )
     {
         $this->custom_attributes[ $_attribute ] = $_value;
@@ -103,6 +115,28 @@ abstract class control
         }
 
         return $custom_attributes;
+    }
+
+    public function set_style( $_attribute, $_value )
+    {
+        $this->styles[ $_attribute ] = $_value;
+    }
+
+    public function get_style( $_attribute )
+    {
+        return $this->styles[ $_attribute ]; 
+    }
+
+    public function get_styles()
+    {
+        $styles = "";
+
+        foreach( $this->styles as $key => $value )
+        {
+            $styles .= $key . " : " . $value . ";";
+        }
+
+        return self::get_attribute("style", $styles);
     }
 
     public function set_data_items( ...$_data_items )
@@ -173,7 +207,6 @@ abstract class control
         }
         else 
             return '';
-
     }
 
     protected function build_attributes()
@@ -181,6 +214,7 @@ abstract class control
         $attributes  = self::get_attribute( "class", $this->build_class());
         $attributes .= self::get_attribute( "id",    $this->get_id());
         $attributes .= $this->get_custom_attributes();
+        $attributes .= $this->get_styles();
 
         if ( $this->get_named() )
         {

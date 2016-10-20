@@ -11,7 +11,7 @@ class script extends control
     private $type;
     private $src;
 
-    public function __construct( $_name, $_type = self::JAVASCRIPT )
+    public function __construct( $_name = "", $_type = self::JAVASCRIPT )
     {
         parent::__construct( $_name );
 

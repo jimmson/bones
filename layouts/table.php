@@ -20,7 +20,7 @@ class table extends layout
 
 		$thead = new thead("thead");
 		$tbody = new tbody("tbody");
-		$row   = new tr("row");
+		$row   = new tr("row");		
 
 		foreach ( $controls as $control )
 		{

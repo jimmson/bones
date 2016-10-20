@@ -16,6 +16,7 @@ class input extends control
     private $readonly   = false;
     private $disabled   = false;
     private $hidden     = false;
+    private $multiple   = false;
 
     public function __construct( $_name, $_type = self::TEXT  )
     {
@@ -24,6 +25,7 @@ class input extends control
         $this->type = $_type;
         $this->set_tag( control::VOID_TAG );
         $this->set_named( true );
+        $this->set_populate_method("set_value");
 
     }
 
@@ -55,6 +57,16 @@ class input extends control
     public function set_readonly( $_readonly )
     {
         $this->readonly = $_readonly;
+    }
+
+    public function get_multiple()
+    {
+        return $this->multiple;
+    }
+
+    public function set_multiple( $_multiple )
+    {
+        $this->multiple = $_multiple;
     }
 
     public function set_disabled( $_disabled )
@@ -97,6 +109,7 @@ class input extends control
         $attributes .= ( $this->readonly ? " readonly " : "");
         $attributes .= ( $this->disabled ? " disabled " : "");
         $attributes .= ( $this->hidden   ? " hidden "   : "");
+        $attributes .= ( $this->multiple ? " multiple " : "");
 
         return $attributes;
     }

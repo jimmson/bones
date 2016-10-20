@@ -1,16 +1,17 @@
 <?php
-namespace bones\controls;
+namespace bones\containers;
 
-use bones\base\control;
+use bones\base\container;
 
-class button extends control
+class button extends container
 {
     // Type
     const SUBMIT   = "submit";
+    const BUTTON   = "button";
 
     private $type;
 
-    public function __construct( $_name, $_type = self::SUBMIT  )
+    public function __construct( $_name = "", $_type = self::SUBMIT  )
     {
         parent::__construct( $_name );
 
