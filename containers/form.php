@@ -13,9 +13,9 @@ class form extends container
     private $method;
     private $enctype;
 
-    public function __construct( $_name = "", $_method = self::GET, $_action = "" )
+    public function __construct($_name = "", $_method = self::GET, $_action = "")
     {
-        parent::__construct( $_name );
+        parent::__construct($_name);
 
         $this->action   = $_action;
         $this->method   = $_method;
@@ -27,7 +27,7 @@ class form extends container
         return $this->action;
     }
 
-    public function set_action( $_action )
+    public function set_action($_action)
     {
         $this->action = $_action;
     }
@@ -37,7 +37,7 @@ class form extends container
         return $this->method;
     }
 
-    public function set_method( $_method )
+    public function set_method($_method)
     {
         $this->method = $_method;
     }
@@ -47,7 +47,7 @@ class form extends container
         return $this->enctype;
     }
 
-    public function set_enctype( $_enctype )
+    public function set_enctype($_enctype)
     {
         $this->enctype = $_enctype;
     }
@@ -55,13 +55,10 @@ class form extends container
     protected function build_attributes()
     {
         $attributes  = parent::build_attributes();
-        $attributes .= self::get_attribute( "action",  $this->get_action() );
-        $attributes .= self::get_attribute( "method",  $this->get_method() );
-        $attributes .= self::get_attribute( "enctype", $this->get_enctype() );
+        $attributes .= self::get_attribute("action", $this->get_action());
+        $attributes .= self::get_attribute("method", $this->get_method());
+        $attributes .= self::get_attribute("enctype", $this->get_enctype());
 
         return $attributes;
     }
-
 }
-
-

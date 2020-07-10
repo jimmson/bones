@@ -6,19 +6,18 @@ use bones\layouts\table as table_layout;
 
 class table extends container
 {
-
     private $data = array();
 
-    public function __construct( $_name = "")
+    public function __construct($_name = "")
     {
-        parent::__construct( $_name );
+        parent::__construct($_name);
 
         $layout = new table_layout();
 
-        $this->set_layout( $layout );
+        $this->set_layout($layout);
     }
 
-    public function set_data( $_data )
+    public function set_data($_data)
     {
         $this->data = $_data;
     }
@@ -28,5 +27,3 @@ class table extends container
         return $this->data;
     }
 }
-
-

@@ -11,48 +11,43 @@ use bones\containers\td;
 
 class table extends layout
 {
+    public function render($_container)
+    {
+        $counter 	= 0;
+        $controls 	= $_container->get_controls();
+        $data	 	= $_container->get_data();
 
-	public function render( $_container )
-	{
-		$counter 	= 0; 
-		$controls 	= $_container->get_controls();
-		$data	 	= $_container->get_data();
+        $thead = new thead("thead");
+        $tbody = new tbody("tbody");
+        $row   = new tr("row");
 
-		$thead = new thead("thead");
-		$tbody = new tbody("tbody");
-		$row   = new tr("row");		
+        foreach ($controls as $control) {
+            $th = new th("th");
+            $th->set_text($control->get_label());
+            $row->add($th);
+        }
 
-		foreach ( $controls as $control )
-		{
-			$th = new th("th");
-			$th->set_text( $control->get_label() );
-			$row->add( $th );
-		}
+        $thead->add($row);
 
-		$thead->add($row);
+        foreach ($data as $content) {
+            $counter = 0;
+            //$content = array_values( $content );
+            $row 	 = new tr("row");
 
-		foreach ( $data as $content )
-		{
-			$counter = 0;
-			//$content = array_values( $content );
-			$row 	 = new tr("row");
+            foreach ($controls as $control) {
+                $new_control = clone $control;
+                $td 		 = new td("td");
 
-			foreach ( $controls as $control )
-			{
-				$new_control = clone $control;
-				$td 		 = new td("td");
+                $new_control->populate($content);
 
-				$new_control->populate($content);
+                $td->add($new_control);
+                $row->add($td);
+            }
 
-				$td->add( $new_control );
-				$row->add( $td );
-			}
+            $tbody->add($row);
+        }
 
-			$tbody->add($row);
-		}
-
-		$thead->render();
-		$tbody->render();
-
-	}
+        $thead->render();
+        $tbody->render();
+    }
 }

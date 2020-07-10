@@ -9,27 +9,27 @@ class select extends container
     private $value;
     private $data = array();
 
-    public function __construct( $_name )
+    public function __construct($_name)
     {
-        parent::__construct( $_name );
+        parent::__construct($_name);
 
         $layout = new select_layout();
 
-        $this->set_layout( $layout );
-        $this->set_named( true );
+        $this->set_layout($layout);
+        $this->set_named(true);
     }
 
-    public function set_value( $_value )
+    public function set_value($_value)
     {
         $this->value = $_value;
     }
 
     public function get_value()
     {
-        return $this->value;    
+        return $this->value;
     }
 
-    public function set_data( $_data )
+    public function set_data($_data)
     {
         $this->data = $_data;
     }
@@ -38,7 +38,4 @@ class select extends container
     {
         return $this->data;
     }
-
 }
-
-

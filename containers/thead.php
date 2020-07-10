@@ -5,7 +5,4 @@ use bones\base\container;
 
 class thead extends container
 {
-
 }
-
-

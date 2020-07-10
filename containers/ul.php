@@ -5,8 +5,4 @@ use bones\base\container;
 
 class ul extends container
 {
-
-
 }
-
-

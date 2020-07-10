@@ -5,7 +5,4 @@ use bones\base\control;
 
 class span extends control
 {
-
 }
-
-

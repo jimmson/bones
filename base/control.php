@@ -1,7 +1,7 @@
 <?php
 
 namespace bones\base;
- 
+
 abstract class control
 {
     //Tag types
@@ -31,13 +31,13 @@ abstract class control
     private $data_items      = array();
     private $data_properties = array();
 
-    public function __construct( $_name = "")
+    public function __construct($_name = "")
     {
         $ReflectionClass = new \ReflectionClass($this);
 
         $this->name = $_name;
         $this->set_element($ReflectionClass->getShortName());
-    	$this->set_renderer(self::DEFAULT_RENDERER);
+        $this->set_renderer(self::DEFAULT_RENDERER);
     }
 
     public function get_element()
@@ -45,19 +45,19 @@ abstract class control
         return $this->element;
     }
 
-    public function set_element( $_element )
+    public function set_element($_element)
     {
         $this->element = $_element;
     }
 
     public function get_name()
     {
-    	return $this->name;
+        return $this->name;
     }
 
-    public function set_id( $_id )
+    public function set_id($_id)
     {
-    	$this->id = $_id;
+        $this->id = $_id;
     }
 
     public function get_label()
@@ -65,103 +65,101 @@ abstract class control
         return $this->label;
     }
 
-    public function set_label( $_label )
+    public function set_label($_label)
     {
         $this->label = $_label;
     }
 
-	public function get_id()
-	{
-		return $this->id;	
-	}
-
-    public function set_text( $_text )
+    public function get_id()
     {
-    	$this->text = $_text;
+        return $this->id;
     }
 
-	public function get_text()
-	{
-		return $this->text;	
-	}
+    public function set_text($_text)
+    {
+        $this->text = $_text;
+    }
+
+    public function get_text()
+    {
+        return $this->text;
+    }
 
     public function get_populate_method()
     {
         return $this->populate_method;
     }
 
-    public function set_populate_method( $_populate_method )
+    public function set_populate_method($_populate_method)
     {
         $this->populate_method = $_populate_method;
     }
 
-    public function set_custom_attribute( $_attribute, $_value )
+    public function set_custom_attribute($_attribute, $_value)
     {
         $this->custom_attributes[ $_attribute ] = $_value;
     }
 
-    public function get_custom_attribute( $_attribute )
+    public function get_custom_attribute($_attribute)
     {
-        return $this->custom_attributes[ $_attribute ]; 
+        return $this->custom_attributes[ $_attribute ];
     }
 
     public function get_custom_attributes()
     {
         $custom_attributes = "";
 
-        foreach( $this->custom_attributes as $key => $value )
-        {
-            $custom_attributes .= self::get_attribute( $key, $value);
+        foreach ($this->custom_attributes as $key => $value) {
+            $custom_attributes .= self::get_attribute($key, $value);
         }
 
         return $custom_attributes;
     }
 
-    public function set_style( $_attribute, $_value )
+    public function set_style($_attribute, $_value)
     {
         $this->styles[ $_attribute ] = $_value;
     }
 
-    public function get_style( $_attribute )
+    public function get_style($_attribute)
     {
-        return $this->styles[ $_attribute ]; 
+        return $this->styles[ $_attribute ];
     }
 
     public function get_styles()
     {
         $styles = "";
 
-        foreach( $this->styles as $key => $value )
-        {
+        foreach ($this->styles as $key => $value) {
             $styles .= $key . " : " . $value . ";";
         }
 
         return self::get_attribute("style", $styles);
     }
 
-    public function set_data_items( ...$_data_items )
+    public function set_data_items(...$_data_items)
     {
-         $this->data_items = array_merge( $this->data_items, $_data_items );
+        $this->data_items = array_merge($this->data_items, $_data_items);
     }
 
     public function has_data_items()
     {
-         return !empty( $this->data_items );
+        return !empty($this->data_items);
     }
 
-    public function set_data_properties( ...$_data_properties )
+    public function set_data_properties(...$_data_properties)
     {
-         $this->data_properties = array_merge( $this->data_properties, $_data_properties );
+        $this->data_properties = array_merge($this->data_properties, $_data_properties);
     }
 
-	public function set_class( ...$_class )
-	{
-		 $this->class = array_merge( $this->class, $_class );
-	}
+    public function set_class(...$_class)
+    {
+        $this->class = array_merge($this->class, $_class);
+    }
 
     public function build_class()
     {
-        return implode( " ", $this->class );
+        return implode(" ", $this->class);
     }
 
     public function get_tag()
@@ -169,7 +167,7 @@ abstract class control
         return $this->tag;
     }
 
-    public function set_tag( $_tag )
+    public function set_tag($_tag)
     {
         $this->tag = $_tag;
     }
@@ -179,7 +177,7 @@ abstract class control
         return $this->named;
     }
 
-    public function set_named( $_named )
+    public function set_named($_named)
     {
         $this->named = $_named;
     }
@@ -189,36 +187,34 @@ abstract class control
         return $this->renderer;
     }
 
-    public function set_renderer( $_renderer )
+    public function set_renderer($_renderer)
     {
         $this->renderer = $_renderer;
     }
 
     private static function get_white_space()
-    {    
-        return "\n" . str_repeat( "\t", self::$indentation_level );
+    {
+        return "\n" . str_repeat("\t", self::$indentation_level);
     }
 
-    protected static function get_attribute( $_attribute, $_value )
+    protected static function get_attribute($_attribute, $_value)
     {
-        if ( $_value != "" )
-        {
+        if ($_value != "") {
             return " " . $_attribute . '="' . $_value . '"';
-        }
-        else 
+        } else {
             return '';
+        }
     }
 
     protected function build_attributes()
     {
-        $attributes  = self::get_attribute( "class", $this->build_class());
-        $attributes .= self::get_attribute( "id",    $this->get_id());
+        $attributes  = self::get_attribute("class", $this->build_class());
+        $attributes .= self::get_attribute("id", $this->get_id());
         $attributes .= $this->get_custom_attributes();
         $attributes .= $this->get_styles();
 
-        if ( $this->get_named() )
-        {
-            $attributes .= self::get_attribute( "name",  $this->get_name());
+        if ($this->get_named()) {
+            $attributes .= self::get_attribute("name", $this->get_name());
         }
 
         return $attributes;
@@ -226,12 +222,11 @@ abstract class control
 
     public function get_opening_tag()
     {
-        $opening_tag  = self::get_white_space() . "<"; 
+        $opening_tag  = self::get_white_space() . "<";
         $opening_tag .= $this->get_element();
         $opening_tag .= $this->build_attributes();
 
-        if ( $this->tag != self::VOID_TAG )
-        {
+        if ($this->tag != self::VOID_TAG) {
             $opening_tag .= ">";
         }
 
@@ -244,13 +239,13 @@ abstract class control
     {
         self::$indentation_level--;
 
-        switch ( $this->tag ) 
-        {
+        switch ($this->tag) {
             case self::VOID_TAG:
                 echo "/>";
                 break;
             case self::CONTANING_TAG:
                 echo self::get_white_space();
+                // no break
             case self::FULL_TAG:
                 echo "</" . $this->get_element() . ">";
                 break;
@@ -258,12 +253,11 @@ abstract class control
                 echo "";
                 break;
         }
-    } 
+    }
 
     public function get_body()
     {
-        if ( $this->get_tag() == self::FULL_TAG || $this->get_tag() == self::CONTANING_TAG ) 
-        {
+        if ($this->get_tag() == self::FULL_TAG || $this->get_tag() == self::CONTANING_TAG) {
             echo $this->get_text();
         }
     }
@@ -284,16 +278,13 @@ abstract class control
         $this->$renderer();
     }
 
-    public function populate( $_data )
+    public function populate($_data)
     {
-        foreach( $this->data_items as $key => $item )
-        {
+        foreach ($this->data_items as $key => $item) {
             $value  = $_data[ $item ];
             $method = $this->data_properties[ $key ];
 
-            $this->$method( $value );           
-        }   
+            $this->$method($value);
+        }
     }
- }
-
-
+}
